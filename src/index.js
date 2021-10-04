@@ -14,6 +14,7 @@ import './assets/css/theme.css'
 import './assets/css/index.css'
 
 import Layout from './components/layout/Layout'
+import App from './App'
 
 const store = createStore(
   rootReducer
@@ -22,7 +23,7 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <Layout />
+      <App />
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

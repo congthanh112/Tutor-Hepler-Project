@@ -1,10 +1,9 @@
-
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import firebase, {auth} from 'firebase';
+import firebase, { auth } from "firebase";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Link, Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-
+import Layout from "./components/layout/Layout";
 
 // Configure Firebase.
 const config = {
@@ -36,8 +35,6 @@ function App() {
       .auth()
       .onAuthStateChanged((user) => {
         const token = firebase.auth().currentUser.getIdToken();
-        console.log(user.xa);
-
         setIsSignedIn(!!user);
       });
 
@@ -57,13 +54,11 @@ function App() {
     );
   }
   return (
-    <div>   
-        <h2>dang nhap thanh cong</h2>
-         <BrowserRouter>
-        <Route path="/dashboard" component={Dashboard}></Route>
+    <div>
+      <BrowserRouter>
+        <Route path="/" component={Layout}></Route>
       </BrowserRouter>
-      </div>
-
+    </div>
   );
 }
 
