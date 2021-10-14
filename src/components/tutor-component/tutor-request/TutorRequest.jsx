@@ -1,25 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./style.scss"
+import axios from 'axios';
 
 
-const getListRequest = () => {
-    return fetch(`${process.env.REACT_APP_API_URL}/tutor-requests`, {
-        method: "GET",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-        }
-    })
-        .then(response => {
-            return response.json();
+const GetListRequest = () => {
+    const [request, setRequest] = useState([]);
+    // return fetch(`${process.env.REACT_APP_API_URL}/tutor-requests`, {
+    //     method: "GET",
+    //     headers: {
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json"
+    //     }
+    // })
+    //     .then(response => {
+    //         return response.json();
 
+    //     })
+    //     .catch(err => console.log(err));
+    axios.get(`${process.env.REACT_APP_API_URL}/tutor-requests`)
+        .then(res => {
+            setRequest(res.data);
+            console.log("AAAAAA"+request)
         })
-        .catch(err => console.log(err));
+        .catch(error => console.log(error));
+
 }
 
 
 const Card = () => {
-    console.log("AAAAAAAAA" + getListRequest)
+    console.log("AAAAAAAAA" + GetListRequest)
     return (
         <div className="col-11">
             <table border="1">

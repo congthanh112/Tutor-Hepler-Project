@@ -1,10 +1,12 @@
 .text {
-    color: #ffbf00;
+    color: #ff9900;
+    font-size: 15px;
 }
 
 .action {
     width: 200px;
-    height: 150px;
+    height: 120px;
+    color: #fff;
 
     .approve {       
         background-color: #1a75ff;
@@ -18,7 +20,8 @@
 
 button {
     width: 80px;
-    height: 50px;
+    height: 40px;
     font-size: 16px;
     border-radius: 10%;
+    color: #fff;
 }
