@@ -1,0 +1,24 @@
+.text {
+    color: #ffbf00;
+}
+
+.action {
+    width: 200px;
+    height: 150px;
+
+    .approve {       
+        background-color: #1a75ff;
+    }
+
+    .reject {
+        background-color: #ff0000;
+        margin-left: 10px;
+    }
+}
+
+button {
+    width: 80px;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 10%;
+}
