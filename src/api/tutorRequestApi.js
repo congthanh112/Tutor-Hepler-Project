@@ -2,9 +2,9 @@ import axiosClient from "./axiosClient";
 
 const tutorRequestApi = {
     getAll() {
-        //const url = '​​/tutor-requests';
+        const url = '​​/tutor-requests';
       
-        const url ='​​https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests';
+        //const url ='​​https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests';
         return axiosClient.get(url)
     },
     delete(id) {

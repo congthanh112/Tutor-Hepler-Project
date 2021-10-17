@@ -13,7 +13,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route path='/' exact component={Dashboard}/>   
-            <Route path='/tutor-management' component={Tutor}/>         
+            <Route path='/tutor' component={Tutor}/>         
             <Route path='/student' component={Student}/>          
             <Route path='/tutor-request' component={TutorRequest}/> 
             <Route path='/feedback' component={Feedback}/>

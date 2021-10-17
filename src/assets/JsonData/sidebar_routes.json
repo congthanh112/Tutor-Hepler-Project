@@ -6,7 +6,7 @@
     },
     {
         "display_name": "Tutor",
-        "route": "/tutor-management",
+        "route": "/tutor",
         "icon": "bx bx-user-pin"
     },
     {

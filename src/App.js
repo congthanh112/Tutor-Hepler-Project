@@ -6,37 +6,15 @@ import Layout from "./components/layout/Layout";
 import axiosClient from "./api/axiosClient";
 import axios from "axios";
 
-
-
-axios.interceptors.request.use((config) => {
-  const isContentTypeNotSetOrContainsApplicationJson =
-      !config.headers ||
-      !config.headers['Content-Type'] ||
-      config.headers['Content-Type'].includes('application/json');
-      config.headers.authorization = `Bearer ${localStorage.getItem("jwtToken")}`;  
-  if (isContentTypeNotSetOrContainsApplicationJson) {
-      config.headers = config.headers || {};
-      config.headers['Content-Type'] = 'application/json';
-      config.headers.authorization = `Bearer ${localStorage.getItem("jwtToken")}`;  
+axios.interceptors.request.use(
+  (config) => {
+    config.headers.authorization = `Bearer ${localStorage.getItem("jwtToken")}`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return config;
-});
-
-// axios.interceptors.request.use(
-//   (config) => {
-//     config.headers.authorization = `Bearer ${localStorage.getItem("jwtToken")}`;  
-//     config.headers
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
-
-
-
-
-
+);
 
 // Configure Firebase.
 const config = {
@@ -72,31 +50,32 @@ function App() {
         const token = firebase.auth().currentUser.getIdToken(true);
         localStorage.setItem("idToken", user.xa);
         axios
-          //.post("/auth/sign-in-admin", { apiKey: user.xa}) 
-          .post("https://tutorhelper20210920193710.azurewebsites.net/api/v1/auth/sign-in-admin", { idToken: user.xa}) 
-          .then(response => {
+          //.post("/auth/sign-in-admin", { apiKey: user.xa})
+          .post(
+            "https://tutorhelper20210920193710.azurewebsites.net/api/v1/auth/sign-in-admin",
+            { idToken: user.xa }
+          )
+          .then((response) => {
             //localStorage.setItem("idToken", response.data.idToken);
-            console.log("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
-            console.log(response.idToken);
-            localStorage.setItem("jwtToken", response.data.jwtToken)
-          })
-        setIsSignedIn(!!user);      
+            localStorage.setItem("jwtToken", response.data.data.jwtToken);
+          });
+        setIsSignedIn(!!user);
       });
 
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
 
-  useEffect(() => {
-    const fetchRequest = () => {
-        //const response = tutorRequestApi.getAll();
-        const response = axios.get( "​​https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests"
-
-        )
-        //setRequest(response.data);
-        console.log("AAAAAAAAA"   + response);
-    };
-    fetchRequest();
-}, []);
+  //   useEffect(() => {
+  //     const fetchRequest = () => {
+  //       //const response = tutorRequestApi.getAll();
+  //       const response = axios.get(
+  //         "​​https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests"
+  //       );
+  //       //setRequest(response.data);
+  //       console.log("AAAAAAAAA" + response);
+  //     };
+  //     fetchRequest();
+  //   }, []);
 
   if (!isSignedIn) {
     return (
