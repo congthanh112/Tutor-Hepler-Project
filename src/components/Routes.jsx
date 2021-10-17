@@ -3,17 +3,21 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import Dashboard from '../pages/Dashboard'
-import TutorRequest from './tutor-component/tutor-request/TutorRequest'
-import TutorFeedback from './tutor-component/tutor-feedback/TutorFeedback'
-import TutorManagement from './tutor-component/tutor-management/TutorManagement'
+import Tutor from './management/tutor/Tutor'
+import Student from './management/student/Student'
+import TutorRequest from './management/tutor-request/TutorRequest'
+import Feedback from './management/feedback/Feedback'
+
 
 const Routes = () => {
     return (
         <Switch>
-            <Route path='/' exact component={Dashboard}/>            
-            <Route path='/tutor-request' component={TutorRequest}/>
-            <Route path='/tutor-feedback' component={TutorFeedback}/>
-            <Route path='/tutor-management' component={TutorManagement}/>
+            <Route path='/' exact component={Dashboard}/>   
+            <Route path='/tutor-management' component={Tutor}/>         
+            <Route path='/student' component={Student}/>          
+            <Route path='/tutor-request' component={TutorRequest}/> 
+            <Route path='/feedback' component={Feedback}/>
+            
         </Switch>
     )
 }

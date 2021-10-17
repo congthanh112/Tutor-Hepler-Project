@@ -1,21 +1,56 @@
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import firebase, { auth } from "firebase";
+import firebase from "firebase";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Link, Redirect, Route, Switch } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { BrowserRouter, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
+import axiosClient from "./api/axiosClient";
+import axios from "axios";
+
+
+
+axios.interceptors.request.use((config) => {
+  const isContentTypeNotSetOrContainsApplicationJson =
+      !config.headers ||
+      !config.headers['Content-Type'] ||
+      config.headers['Content-Type'].includes('application/json');
+      config.headers.authorization = `Bearer ${localStorage.getItem("jwtToken")}`;  
+  if (isContentTypeNotSetOrContainsApplicationJson) {
+      config.headers = config.headers || {};
+      config.headers['Content-Type'] = 'application/json';
+      config.headers.authorization = `Bearer ${localStorage.getItem("jwtToken")}`;  
+  }
+  return config;
+});
+
+// axios.interceptors.request.use(
+//   (config) => {
+//     config.headers.authorization = `Bearer ${localStorage.getItem("jwtToken")}`;  
+//     config.headers
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
+
+
+
+
 
 // Configure Firebase.
 const config = {
-  apiKey: "AIzaSyBPuahElQjBgbLM1E-5GTgxNfWhsDkyJVY",
-  authDomain: "lively-marking-322503.firebaseapp.com",
-  projectId: "lively-marking-322503",
-  storageBucket: "lively-marking-322503.appspot.com",
-  messagingSenderId: "661890962613",
-  appId: "1:661890962613:web:c2263d823d86d2ac231afc",
-  measurementId: "G-9QP37CCVF1",
+  apiKey: "AIzaSyDefd9qBWYVGTqBlmDoyJHVu9hmlJufT68",
+  authDomain: "tutor-helper-6faa2.firebaseapp.com",
+  projectId: "tutor-helper-6faa2",
+  storageBucket: "tutor-helper-6faa2.appspot.com",
+  messagingSenderId: "1083830889210",
+  appId: "1:1083830889210:web:2f65739bdbdf07c35b3743",
+  measurementId: "G-WLNV3EQDWD",
 };
-firebase.initializeApp(config);
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
@@ -34,12 +69,34 @@ function App() {
     const unregisterAuthObserver = firebase
       .auth()
       .onAuthStateChanged((user) => {
-        const token = firebase.auth().currentUser.getIdToken();
-        setIsSignedIn(!!user);
+        const token = firebase.auth().currentUser.getIdToken(true);
+        localStorage.setItem("idToken", user.xa);
+        axios
+          //.post("/auth/sign-in-admin", { apiKey: user.xa}) 
+          .post("https://tutorhelper20210920193710.azurewebsites.net/api/v1/auth/sign-in-admin", { idToken: user.xa}) 
+          .then(response => {
+            //localStorage.setItem("idToken", response.data.idToken);
+            console.log("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
+            console.log(response.idToken);
+            localStorage.setItem("jwtToken", response.data.jwtToken)
+          })
+        setIsSignedIn(!!user);      
       });
 
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
+
+  useEffect(() => {
+    const fetchRequest = () => {
+        //const response = tutorRequestApi.getAll();
+        const response = axios.get( "​​https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests"
+
+        )
+        //setRequest(response.data);
+        console.log("AAAAAAAAA"   + response);
+    };
+    fetchRequest();
+}, []);
 
   if (!isSignedIn) {
     return (

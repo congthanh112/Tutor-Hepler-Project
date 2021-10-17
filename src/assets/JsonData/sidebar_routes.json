@@ -11,7 +11,7 @@
     },
     {
         "display_name": "Student",
-        "route": "/tutor-management",
+        "route": "/student",
         "icon": "bx bx-user-pin"
     },
     {
@@ -21,7 +21,7 @@
     },
     {
         "display_name": "Feedback",
-        "route": "/tutor-feedback",
+        "route": "/feedback",
         "icon": "bx bx-notification"
     }
     
