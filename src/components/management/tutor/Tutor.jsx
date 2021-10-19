@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./style.scss";
+import "./tutor.scss";
 import axios from "axios";
-import "./trump.jpg"
+import Card from "./Card";
+import Pagination from "../../pagination/Pagination";
 
 axios.interceptors.request.use(
     (config) => {
@@ -13,61 +14,44 @@ axios.interceptors.request.use(
     }
 );
 
-
-const Card = () => {
+const Tutor = () => {
     const [tutor, setTutor] = useState([]);
-    const [status, setStatus] = useState('Pending');
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [resultPerPage, setResultPerPage] = useState(9);
 
     useEffect(() => {
-        try {
-            axios
-                .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutors")
-                .then((response) => {
-                    setTutor(response.data.data);
-
-                });
-        } catch (error) {
-            console.log(error);
-        }
+        const fetchRequest = async () => {
+            setLoading(true);
+            try {
+                await axios
+                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutors")
+                    .then((response) => {
+                        setTutor(response.data.data);
+                        setLoading(false);
+                    });
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchRequest();
     }, []);
 
+  //Get current result
+  const indexOfLastResult = currentPage * resultPerPage;
+  const indexOfFirstResult = indexOfLastResult - resultPerPage;
+  const currentResult = tutor.slice(indexOfFirstResult, indexOfLastResult);
 
-
+  //Change page 
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div>
-
-            {tutor.map((item, id) => {
-                return [
-                    <div className="card">
-                        <img src="./trump.jpg" width="70" height="70" alt="Tutor image" />
-                        <div className="p">
-                            <h3>{item.fullName}</h3>
-                            <p >
-                                {item.email}<br />
-                                {item.phoneNumber}
-                            </p>
-                        </div>
-                        <div>
-
-                        </div>
-
-                    <button type="button" className="btn">View all</button>
-                    </div>
-                ]
-            })}
-
+        <div className="container mt-5">
+            <Card result={currentResult} loading={loading}/>
+            <Pagination resultPerPage={resultPerPage} totalResult={tutor.length} paginate={paginate} />
         </div>
-
-    );
-};
-
-const Tutor = () => {
-    return (
-        <div>
-            <Card />
-        </div>
-    );
+    )
+ 
 };
 
 export default Tutor;

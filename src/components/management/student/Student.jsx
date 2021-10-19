@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./style.scss";
+import "./student.scss";
 import axios from "axios";
+import Card from "./Card";
+import Pagination from "../../pagination/Pagination";
 
 axios.interceptors.request.use(
     (config) => {
@@ -12,60 +14,46 @@ axios.interceptors.request.use(
     }
 );
 
-
-const Card = () => {
+const Student = () => {
     const [student, setStudent] = useState([]);
-    const [status, setStatus] = useState('Pending');
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [resultPerPage, setResultPerPage] = useState(6);
 
     useEffect(() => {
-        try {
-            axios
-                .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/students")
-                .then((response) => {
-                    setStudent(response.data.data);
-
-                });
-        } catch (error) {
-            console.log(error);
-        }
+        const fetchRequest = async () => {
+            setLoading(true);
+            try {
+                await axios
+                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/students")
+                    .then((response) => {
+                        setStudent(response.data.data);
+                        setLoading(false);
+                    });
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchRequest();
     }, []);
 
+    //Get current result
+    const indexOfLastResult = currentPage * resultPerPage;
+    const indexOfFirstResult = indexOfLastResult - resultPerPage;
+    const currentResult = student.slice(indexOfFirstResult, indexOfLastResult);
 
-
+    //Change page 
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div>
-
-            {student.map((item, id) => {
-                return [
-                    <div className="card">               
-                        <div className="p">
-                            <h3>{item.fullName}</h3>
-                            <p >
-                                {item.email}<br />
-                                {item.phoneNumber}
-                            </p>
-                        </div>
-                        <div>
-
-                        </div>
-
-                    <a href="#" className="link">View all</a>
-                    </div>
-                ]
-            })}
-
+        <div className="container mt-5">
+            <Card result={currentResult} loading={loading} />
+            <Pagination resultPerPage={resultPerPage} totalResult={student.length} paginate={paginate} />
         </div>
-
-    );
-};
-
-const Student = () => {
-    return (
-        <div>
-            <Card />
-        </div>
-    );
+    )
 };
 
 export default Student;
+
+
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./style.scss";
+import "./tutor-request.scss";
 
 import tutorRequestApi from "../../../api/tutorRequestApi";
 import axios from "axios";
@@ -35,43 +35,48 @@ const Card = () => {
     } catch (error) {
       console.log("Error");
     }
-  }, []);
+  }, [status]);
 
 
 
   return (
     <div className="col-11">
-      <table border="1">
-        <tr>
-          <th>No.</th>
-          <th>Content</th>
-          <th>Author</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-
+      <table class="table table-bordered a">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Content</th>
+            <th>Author</th>
+            <th>Create Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
         {request.map((item, id) => {
           return [
-            <tr>         
+            <tbody>
+              <tr>
                 <td>{id}</td>
                 <td>
-                  <p> 
+                  <p>
                     <h3>{item.title}</h3>
                     {item.description}
-                    </p>
+                  </p>
                   <a href="#" className="link">view all</a>
                 </td>
                 <td>{item.studentId}</td>
+                <td>{item.createAt}</td>
                 <td className="text">Pending</td>
                 <td className="action">
-                  <button type="button" className="approve" >
+                  <button type="button" className="approve" onClick={() => {setStatus = "approve"}}>
                     Approve
                   </button>
-                  <button type="button" className="reject" >
+                  <button type="button" className="reject" onClick={() => {setStatus = "reject"}}>
                     Reject
                   </button>
-                </td>         
-            </tr>
+                </td>
+              </tr>
+            </tbody>
           ]
         })}
       </table>
