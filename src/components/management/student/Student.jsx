@@ -25,7 +25,12 @@ const Student = () => {
             setLoading(true);
             try {
                 await axios
-                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/students")
+                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/students", {
+                        params: {
+                            PageNume: currentPage,
+                            PageSize: 100
+                        }
+                    })
                     .then((response) => {
                         setStudent(response.data.data);
                         setLoading(false);

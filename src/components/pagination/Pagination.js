@@ -5,7 +5,6 @@ const Pagination = ({ resultPerPage, totalResult, paginate }) => {
 
   for (let i = 1; i <= Math.ceil(totalResult / resultPerPage); i++) {
     pageNumbers.push(i);
-    console.log("CACCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC", i)
   }
 
   return (
@@ -23,4 +22,4 @@ const Pagination = ({ resultPerPage, totalResult, paginate }) => {
   )
 }
 
-export default Pagination;
+export default Pagination; 

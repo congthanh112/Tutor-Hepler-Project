@@ -25,7 +25,12 @@ const Tutor = () => {
             setLoading(true);
             try {
                 await axios
-                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutors")
+                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutors", {
+                        params: {
+                            PageNume: currentPage,
+                            PageSize: 100
+                        }
+                    })
                     .then((response) => {
                         setTutor(response.data.data);
                         setLoading(false);

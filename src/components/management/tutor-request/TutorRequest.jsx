@@ -18,7 +18,6 @@ axios.interceptors.request.use(
 
 const Card = () => {
   const [request, setRequest] = useState([]);
-  const [status, setStatus] = useState('Pending');
 
   useEffect(() => {
     try {
@@ -27,17 +26,34 @@ const Card = () => {
           "https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests"
         )
         .then((response) => {
-
-          console.log(response.data.data);
           setRequest(response.data.data);
 
         });
     } catch (error) {
       console.log("Error");
     }
-  }, [status]);
+  }, []);
 
-
+const OnChangeStatus = (requestId, requestStatus) => {
+    useEffect(() => {
+        try {
+          axios
+            .put(
+              "https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests", 
+             {
+                tutorRequestId: requestId,
+                status: requestStatus
+              }
+            )
+            .then((response) => {
+              setRequest(response.data.data);
+    
+            });
+        } catch (error) {
+          console.log("Error");
+        }
+      }, []);
+}
 
   return (
     <div className="col-11">
@@ -68,10 +84,10 @@ const Card = () => {
                 <td>{item.createAt}</td>
                 <td className="text">Pending</td>
                 <td className="action">
-                  <button type="button" className="approve" onClick={() => {setStatus = "approve"}}>
+                  <button type="button" className="approve" onClick={OnChangeStatus(item.tutorRequestId, status = 'approve')}>
                     Approve
                   </button>
-                  <button type="button" className="reject" onClick={() => {setStatus = "reject"}}>
+                  <button type="button" className="reject" onClick={OnChangeStatus((item.tutorRequestId, status = 'reject'))}>
                     Reject
                   </button>
                 </td>
