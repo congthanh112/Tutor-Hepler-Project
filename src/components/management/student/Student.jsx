@@ -56,6 +56,33 @@ const Student = () => {
             <Pagination resultPerPage={resultPerPage} totalResult={student.length} paginate={paginate} />
         </div>
     )
+    // return (
+    //     <div>
+    //       {student.map((item, id) => {
+    //         return [
+    //           <table border="1">
+    //               <tr>
+    //                   <th>No.</th>
+    //                   <th>Infor</th>
+    //                   <th></th>
+    //                   <th></th>
+                     
+    //               </tr>
+    //               <tr>
+    //                   <td>{id}</td>
+    //                   <td>
+    //                       {item.fullName}
+    //                       {item.email}
+    //                       {item.phoneNumber}
+    //                   </td>
+    //               </tr>
+    //           </table>
+    //         ]
+    //       })}
+    
+    //     </div>
+    
+    //   );
 };
 
 export default Student;

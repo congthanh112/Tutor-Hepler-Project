@@ -46,7 +46,7 @@ const Table = props => {
                     }
                     {
                         props.bodyData && props.renderBody ? (
-                            <tbody>
+                            <tbody className="tbodyHover">
                                 {
                                     dataShow.map((item, index) => props.renderBody(item, index))
                                 }

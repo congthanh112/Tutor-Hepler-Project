@@ -34,27 +34,37 @@ const Card = () => {
 
 
     return (
-        <div>
+        <div className="col-10">
+            <table className="table table-bordered" border="1">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Content</th>
+                        <th>Author</th>
+                        <th>Rating</th>
+                        <th>Create Date</th>
+                    </tr>
+                </thead>
+                {feedback.map((item, id) => {
+                    return [
 
-            {feedback.map((item, id) => {
-                return [
-                    <div className="card">               
-                        <div className="p">
-                            <h3>{item.fullName}</h3>
-                            <p >
-                                {item.email}<br />
-                                {item.phoneNumber}
-                            </p>
-                        </div>
-                        <div>
+                        <tr>
+                            <td>{id}</td>
+                            <td>
+                                <p>
+                                    <h3>{item.title}</h3>
+                                    {item.feedbackContent}
+                                </p>
 
-                        </div>
+                            </td>
+                            <td>{item.studentId}</td>
+                            <td>{item.ratingScorce}</td>
+                            <td>{item.createAt}</td>
+                        </tr>
 
-                    <a href="#" className="link">View all</a>
-                    </div>
-                ]
-            })}
-
+                    ]
+                })}
+            </table>
         </div>
 
     );
