@@ -4,6 +4,7 @@ import './layout.css'
 
 import Sidebar from '../sidebar/Sidebar'
 import TopNav from '../topnav/TopNav'
+import Footer from '../footer/Footer'
 import Routes from '../Routes'
 
 import { BrowserRouter, Route } from 'react-router-dom'
@@ -39,6 +40,7 @@ const Layout = () => {
                             <Routes/>
                         </div>
                     </div>
+                    <Footer/>
                 </div>
             )}/>
         </BrowserRouter>

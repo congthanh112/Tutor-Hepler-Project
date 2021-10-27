@@ -34,6 +34,7 @@ const Tutor = () => {
                     })
                     .then((response) => {
                         setTutor(response.data.data);
+                        console.log(response.data.data)
                         setLoading(false);
                     });
             } catch (error) {
@@ -57,40 +58,7 @@ const Tutor = () => {
             <Pagination resultPerPage={resultPerPage} totalResult={tutor.length} paginate={paginate} />
         </div>
     )
-
-
-    // return (
-    //     <div>
-    //         {tutor.map((item, id) => {
-    //             return [
-    //                 <table border="1">
-    //                     <thead>
-    //                     <tr>
-    //                         <th>No.</th>
-    //                         <th>Infor</th>
-    //                         <th>Image</th>
-    //                         <th></th>
-    //                     </tr>
-    //                     </thead>
-    //                     <tbody>
-    //                     <tr>
-    //                         <td>{id}</td>
-    //                         <td>
-    //                             {item.fullName}<br/>
-    //                             {item.email}<br/>
-    //                             {item.phoneNumber}
-    //                         </td>
-    //                         <td>
-    //                             <img src={item.imagePath} width="70" height="70" alt="Tutor image" />
-    //                         </td>
-    //                     </tr>
-    //                     </tbody>
-    //                 </table>
-    //             ]
-    //         })}
-    //     </div>
-    // );
-
 };
 
 export default Tutor;
+

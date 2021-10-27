@@ -35,7 +35,7 @@ const Card = () => {
 
     return (
         <div className="col-10">
-            <table className="table table-bordered" border="1">
+            <table className="table table-bordered">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -45,25 +45,26 @@ const Card = () => {
                         <th>Create Date</th>
                     </tr>
                 </thead>
-                {feedback.map((item, id) => {
-                    return [
+                <tbody>
+                    {feedback.map((item, id) => {
+                        return [
+                            <tr>
+                                <td>{id + 1}</td>
+                                <td>
+                                    <p>
+                                        <h3>{item.title}</h3>
+                                        {item.feedbackContent}
+                                    </p>
 
-                        <tr>
-                            <td>{id}</td>
-                            <td>
-                                <p>
-                                    <h3>{item.title}</h3>
-                                    {item.feedbackContent}
-                                </p>
+                                </td>
+                                <td>{item.studentId}</td>
+                                <td>{item.ratingScorce}</td>
+                                <td>{item.createAt}</td>
+                            </tr>
 
-                            </td>
-                            <td>{item.studentId}</td>
-                            <td>{item.ratingScorce}</td>
-                            <td>{item.createAt}</td>
-                        </tr>
-
-                    ]
-                })}
+                        ]
+                    })}
+                </tbody>
             </table>
         </div>
 

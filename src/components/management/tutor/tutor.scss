@@ -1,6 +1,7 @@
 .cardTutor {
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 35px;
+    padding: 25px !important;
 }
 
 .p {
@@ -16,4 +17,10 @@
     justify-content: space-around;
     align-items: center;
     margin-left: 150px;
+}
+
+.header-right {
+    display: inline-block;
+    width: 68%;
+    padding-left: 10px;
 }

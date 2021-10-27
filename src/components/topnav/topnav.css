@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: space-between;
     height: var(--topnav-height);
+    background-color: #86fce9;
 }
 
 .topnav__search {
@@ -63,9 +64,9 @@
 }
 
 .topnav__right-user__image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 40px; 
+    height: 40px; 
+    border-radius: 40%;
     overflow: hidden;
     margin-right: 10px;
 }

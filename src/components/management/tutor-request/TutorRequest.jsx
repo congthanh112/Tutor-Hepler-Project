@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./tutor-request.scss";
-// import { Table, Input, InputNumber, Popconfirm, Form, Typography } from 'antd';
-
 import axios from "axios";
-
+import GetAuthor from './GetAuthor';
 
 axios.interceptors.request.use(
     (config) => {
@@ -15,50 +13,31 @@ axios.interceptors.request.use(
     }
 );
 
-
-const Card = () => {
+const TutorRequest = () => {
     const [request, setRequest] = useState([]);
-    const [name, setName] = useState(null);
-    
 
     useEffect(() => {
-        try {
-            axios
-                .get(
-                    "https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests"
-                )
-                .then((response) => {
-                    setRequest(response.data.data);
-
-                });
-
-        } catch (error) {
-            console.log("Error");
+        const fetchRequest = async () => {
+            try {
+                axios
+                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests", {
+                        params: {
+                            PageSize: 100,
+                        }
+                    })
+                    .then((response) => {
+                        setRequest(response.data.data);
+    
+                    });
+    
+            } catch (error) {
+                console.log(error);
+            }
         }
+        fetchRequest();
     }, []);
 
-
-    function getStudentById(id) {
- 
-            axios
-                .get(`https://tutorhelper20210920193710.azurewebsites.net/api/v1/students/${id}`)
-                .then((response) => {
-                    console.log(response.data.data.fullName);
-                   
-                })
-              
-                .catch(err => {
-                    console.log(err);
-                });
-    }
-    //const getStudentById = (id) => axios.get(`https://tutorhelper20210920193710.azurewebsites.net/api/v1/students/${id}`).response.data.data.fullName;
-       
-  
-  
-       
-
     // const OnChangeStatus = (requestId, requestStatus) => {
-    //     useEffect(() => {
     //         try {
     //             axios
     //                 .put(
@@ -75,7 +54,6 @@ const Card = () => {
     //         } catch (error) {
     //             console.log("Error");
     //         }
-    //     }, []);
     // 
 
     return (
@@ -94,7 +72,6 @@ const Card = () => {
                 <tbody>
                     {request.map((item, id) => {
                         return [
-
                             <tr>
                                 <td>{id + 1}</td>
                                 <td>
@@ -104,11 +81,9 @@ const Card = () => {
                                     </p>
                                     <a href="#" className="link">view all</a>
                                 </td>
-                                <td>{item.studentId}</td>
-                                {/* <td>{getStudentById(item.studentId)}</td> */}
-                                    {/* <td>a</td> */}
+                                <td><GetAuthor id={item.studentId}/></td>
                                 <td>{item.createAt}</td>
-                                <td className="text">Pending</td>
+                                <td className="text">{item.status == true ? "Approve" : "Reject"}</td>
                                 <td className="action">
                                     <button type="button" className="approve">
                                         Approve
@@ -122,16 +97,6 @@ const Card = () => {
                     })}
                 </tbody>
             </table>
-        </div>
-    );
-
-};
-
-const TutorRequest = () => {
-    return (
-        <div>
-            <h3>List request</h3>
-            <Card />
         </div>
     );
 };

@@ -1,13 +1,8 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import "./tutor.scss";
+import Modal from "./Modal";
 
 const Card = ({ result, loading }) => {
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   if (loading) {
     return <h2>Loading...</h2>
@@ -18,52 +13,31 @@ const Card = ({ result, loading }) => {
       {result.map((item) => {
         return [
           <div className="card cardTutor col-3">
-            <img src={item.imagePath} width="70" height="70" alt="Tutor image" />
-            <div className="p">
-              <h3>{item.fullName}</h3>
-              <p >
-                {item.email}<br />
-                {item.phoneNumber}
-              </p>
+            <div>
+              <img src={item.imagePath} width="70" height="70" alt="Tutor image" style={{ marginBottom: 80 }} />
+              <div className="header-right">
+                <h5>{item.fullName}</h5>
+                <p>
+                  {item.email}<br />
+                  {item.phoneNumber}
+                </p>
+              </div>
             </div>
-
-            <button type="button" className="btnView" onClick={handleOpen}>View all</button>
-
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Text in a modal
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                </Typography>
-              </Box>
-            </Modal>
-
+            <button type="button" className="btnView" onClick={showDetail}>View all</button>
+            
           </div>
         ]
       })}
-
     </div>
-
   );
 }
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+const showDetail = () => {
+  console.log("show modal");
+  return (
+    <Modal />
+  );
+}
 
 export default Card;
+
