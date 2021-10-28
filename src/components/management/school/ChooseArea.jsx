@@ -21,7 +21,7 @@ axios.interceptors.request.use(
 
 const ChooseArea = () => {
     const [listArea, setListArea] = useState([]);
-    const [idSelected, setIdSelected] = useState();
+    const [idSelected, setIdSelected] = useState("all");
 
     useEffect(() => {
         const fetchRequest = async () => {
@@ -41,34 +41,35 @@ const ChooseArea = () => {
             }
         }
         fetchRequest();
-    }, [])
+    }, [idSelected])
 
-    const handleChange = (event) => {
-        console.log("NNNNNNNNNNNNNNNNNNNNNNN", event.value)
-        setIdSelected(event.value)
+    const handleChange = (event, value) => {
+        setIdSelected(value.props.value)
     };
 
 
     return (
         <div>
-            <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                    <InputLabel>Select Area</InputLabel>
+            <div>
+                <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                        <InputLabel>Select Area</InputLabel>
 
-                    <Select onChange={handleChange}>
-                        <MenuItem value="">All</MenuItem>
-                        {listArea.map((item, id) => {
-                            return [
-                                <MenuItem value={item.areaId}>{item.areaName}</MenuItem>
-                            ]
-                        })}
+                        <Select onChange={handleChange}>
+                            <MenuItem value="all">All</MenuItem>
+                            {listArea.map((item, id) => {
+                                return [
+                                    <MenuItem value={item.areaId}>{item.areaName}</MenuItem>
+                                ]
+                            })}
 
-                    </Select>
-                </FormControl>
-            </Box>
+                        </Select>
+                    </FormControl>
+                </Box>
+                            
 
+            </div>
             <SchoolList id={idSelected} />
-
         </div>
     )
 }

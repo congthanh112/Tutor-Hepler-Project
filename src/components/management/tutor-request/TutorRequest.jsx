@@ -37,25 +37,6 @@ const TutorRequest = () => {
         fetchRequest();
     }, []);
 
-    // const OnChangeStatus = (requestId, requestStatus) => {
-    //         try {
-    //             axios
-    //                 .put(
-    //                     "https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests",
-    //                     {
-    //                         tutorRequestId: requestId,
-    //                         status: requestStatus
-    //                     }
-    //                 )
-    //                 .then((response) => {
-    //                     setRequest(response.data.data);
-
-    //                 });
-    //         } catch (error) {
-    //             console.log("Error");
-    //         }
-    // 
-
     return (
         <div className="col-11">
             <table className="table table-bordered " >

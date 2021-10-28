@@ -13,50 +13,68 @@ axios.interceptors.request.use(
 );
 
 
-const SchoolList = (areaId) => {
+const SchoolList = (id) => {
 
     const [result, setResult] = useState([]);
 
     useEffect(() => {
-        if(areaId === undefined) {
-            console.log("DEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-            const fetchRequest = async () => {
-                try {
+        const fetchRequest = async () => {
+            try {
+                if(id.id == "all") {
                     await axios
-                        .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/areas")
-                        .then((response) => {
-                            setResult(response.data)
-                        });
-    
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-            fetchRequest();
-        } else {
-            console.log("UNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN")
-            const fetchRequest = async () => {
-                try {
+                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/schools", {
+                        params: {
+                            PageSize: 100
+                        }
+                    })        
+                    .then((response) => {
+                        setResult(response.data.data)
+                    });
+                } else {
                     await axios
-                        .get(`https://tutorhelper20210920193710.azurewebsites.net/api/v1/areas/${areaId}`)
-                        .then((response) => {
-                            setResult(response.data)
-                        });
-    
-                } catch (error) {
-                    console.log(error);
+                    .get(`https://tutorhelper20210920193710.azurewebsites.net/api/v1/areas/${id.id}`)
+                    .then((response) => {
+                        setResult(response.data.schools)
+                    });
                 }
+            } catch (error) {
+                console.log(error);
             }
-            fetchRequest();
         }
-        
-    }, [areaId])
+        fetchRequest();
+    }, [id])
 
 
 
 
     return (
-        <div>AAAAAAAAAAAAAAAAAAAA</div>
+        <div className="col-11">
+            <table className="table table-bordered " >
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>School</th>
+                        <th>Address</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {result.map((item, id) => {
+                    return [
+                        <tr>
+                            <td>{id + 1}</td>
+                            <td>{item.schoolName}</td>
+                            <td>{item.address}</td>
+                            <td>
+                                {item.schoolLevel == 12 ? "High school": "Secondary school"}
+                            </td>
+                            
+                        </tr>
+                    ]
+                })}
+            </tbody>
+            </table>
+        </div>
     )
 }
 

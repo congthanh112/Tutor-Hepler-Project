@@ -2,10 +2,15 @@ import React from 'react';
 import "./tutor.scss";
 import Modal from "./Modal";
 
+import SaveIcon from '@mui/icons-material/Save';
+import { LoadingButton } from '@mui/lab';
+
 const Card = ({ result, loading }) => {
 
   if (loading) {
-    return <h2>Loading...</h2>
+    return (
+      <LoadingButton loading loadingPosition="start" size="large" startIcon={<SaveIcon />} variant="outlined">Loading...</LoadingButton>
+    )
   }
 
   return (
@@ -24,7 +29,7 @@ const Card = ({ result, loading }) => {
               </div>
             </div>
             <button type="button" className="btnView" onClick={showDetail}>View all</button>
-            
+
           </div>
         ]
       })}
