@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import "./school.scss"
 
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormControl from '@mui/material/FormControl';
-// import Select from '@mui/material/Select';
-import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
-import SchoolList from './SchoolList';
+import { Box, InputLabel, MenuItem, FormControl, Select, Button } from '@mui/material'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 
 axios.interceptors.request.use(
@@ -19,57 +16,32 @@ axios.interceptors.request.use(
     }
 );
 
-const ChooseArea = () => {
-    const [listArea, setListArea] = useState([]);
-    const [idSelected, setIdSelected] = useState("all");
-
-    useEffect(() => {
-        const fetchRequest = async () => {
-            try {
-                await axios
-                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/areas", {
-                        params: {
-                            PageSize: 100,
-                        }
-                    })
-                    .then((response) => {
-                        setListArea(response.data)
-                    });
-
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchRequest();
-    }, [idSelected])
-
-    const handleChange = (event, value) => {
-        setIdSelected(value.props.value)
-    };
+const ChooseArea = (props) => {
+    const { listArea, handleChangeIdSelected } = props;
 
 
     return (
-        <div>
-            <div>
+        <div style={{display: "inline-flex"}}>
+            <div style={{ width: 900 }}>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
                         <InputLabel>Select Area</InputLabel>
-
-                        <Select onChange={handleChange}>
+                        <Select onChange={handleChangeIdSelected}>
                             <MenuItem value="all">All</MenuItem>
                             {listArea.map((item, id) => {
                                 return [
                                     <MenuItem value={item.areaId}>{item.areaName}</MenuItem>
                                 ]
                             })}
-
                         </Select>
                     </FormControl>
                 </Box>
-                            
-
             </div>
-            <SchoolList id={idSelected} />
+
+            <Button variant="contained" startIcon={<AddCircleOutlineIcon />} style={{ marginLeft: 75, width: 125 }}>
+                Add new
+            </Button>
+
         </div>
     )
 }

@@ -48,8 +48,8 @@ const SchoolList = (id) => {
 
 
     return (
-        <div className="col-11">
-            <table className="table table-bordered " >
+        <div className="col-11" style={{ marginTop: 25}}>
+            <table className="table table-bordered" >
                 <thead>
                     <tr>
                         <th>No.</th>

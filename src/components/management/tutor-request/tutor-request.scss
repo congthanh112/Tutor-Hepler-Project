@@ -9,11 +9,15 @@
     color: #fff;
 
     .approve {       
-        background-color: #1a75ff;
+        background-color: #00bd2c;
     }
 
     .reject {
         background-color: #ff0000;
+        margin-left: 10px;
+    }
+    .delete {
+        background-color: #3b93db;
         margin-left: 10px;
     }
 }

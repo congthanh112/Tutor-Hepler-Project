@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./tutor-request.scss";
 import axios from "axios";
 import GetAuthor from './GetAuthor';
+import Status from "./Status";
+import Action from "./Action";
 
 axios.interceptors.request.use(
     (config) => {
@@ -27,9 +29,9 @@ const TutorRequest = () => {
                     })
                     .then((response) => {
                         setRequest(response.data.data);
-    
+
                     });
-    
+
             } catch (error) {
                 console.log(error);
             }
@@ -38,7 +40,7 @@ const TutorRequest = () => {
     }, []);
 
     return (
-        <div className="col-11">
+        <div className="col-12">
             <table className="table table-bordered " >
                 <thead>
                     <tr>
@@ -46,6 +48,7 @@ const TutorRequest = () => {
                         <th>Content</th>
                         <th>Author</th>
                         <th>Create Date</th>
+                        <th>Update Date</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -57,22 +60,16 @@ const TutorRequest = () => {
                                 <td>{id + 1}</td>
                                 <td>
                                     <p>
-                                        <h3>{item.title}</h3>
+                                        <h6>{item.title}</h6>
                                         {item.description}
                                     </p>
                                     <a href="#" className="link">view all</a>
                                 </td>
-                                <td><GetAuthor id={item.studentId}/></td>
+                                <td><GetAuthor id={item.studentId} /></td>
                                 <td>{item.createAt}</td>
-                                <td className="text">{item.status == true ? "Approve" : "Reject"}</td>
-                                <td className="action">
-                                    <button type="button" className="approve">
-                                        Approve
-                                    </button>
-                                    <button type="button" className="reject">
-                                        Reject
-                                    </button>
-                                </td>
+                                <td>{item.createAt}</td>
+                                <td><Status status={item.status}/></td>
+                                <td><Action id={item.totorRequestId} status={item.status}/></td>
                             </tr>
                         ]
                     })}

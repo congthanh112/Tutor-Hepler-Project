@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import "./school.scss";
 import axios from "axios";
 
 import ChooseArea from './ChooseArea';
+import SchoolList from './SchoolList';
 
 
 axios.interceptors.request.use(
@@ -17,10 +17,36 @@ axios.interceptors.request.use(
 
 
 const School = () => {
+    const [listArea, setListArea] = useState([]);
+    const [idSelected, setIdSelected] = useState("all");
 
+    useEffect(() => {
+        const fetchRequest = async () => {
+            try {
+                await axios
+                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/areas", {
+                        params: {
+                            PageSize: 100,
+                        }
+                    })
+                    .then((response) => {
+                        setListArea(response.data)
+                    });
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchRequest();
+    }, [idSelected])
+
+    const handleChangeIdSelected = (event, value) => {
+        setIdSelected(value.props.value)
+    };
     return (
         <div>
-            <ChooseArea />          
+            <ChooseArea listArea={listArea} handleChangeIdSelected={handleChangeIdSelected}  />  
+            <SchoolList id={idSelected} />        
         </div>
     )
 }
