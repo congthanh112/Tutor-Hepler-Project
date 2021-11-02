@@ -12,8 +12,8 @@ axios.interceptors.request.use(
     }
 );
 
-const Action = ({id, status}) => {
-
+const Action = (status) => {
+console.log(status)
     // useEffect(() => {
     //     const fetchRequest = async () => {
     //         try {
@@ -31,31 +31,34 @@ const Action = ({id, status}) => {
     //     fetchRequest();
     // }, []);
 
+ //return <div>a</div>
 
-
-return <div>a</div>
-    // if (status.status == "Pending") {
-    //     return (
-    //         <div className="action">
-    //             <button type="button" className="approve" >
-    //                 Approve
-    //             </button>
-    //             <button type="button" className="reject" >
-    //                 Reject
-    //             </button>
-    //         </div>
-    //     )
-    // } else if (status.status == "Approved") {
-    //     return (
-    //         <div className="action">
-    //             <button type="button" className="delete" >
-    //                 Delete
-    //             </button>
-    //         </div>
-    //     )
-    // } else if(status.status == "Rejected") {
-    //     return <div style={{ color: '#ff0000' }}>Reject</div>
-    // }
+    if (status.status == "Pending") {
+        return (
+            <div className="action">
+                <button type="button" className="approve" >
+                    Approve
+                </button>
+                <button type="button" className="reject" >
+                    Reject
+                </button>
+            </div>
+        )
+    } else if (status.status == "Approved") {
+        return (
+            <div className="action">
+                <button type="button" className="delete" >
+                    Delete
+                </button>
+            </div>
+        )
+    } else if(status.status == "Reject") {
+        return <div></div>
+    } else if(status.status == "Accepted") {
+        return <div></div>
+    } else if(status.status == "Deleted") {
+        return <div></div>
+    }
 
 
 

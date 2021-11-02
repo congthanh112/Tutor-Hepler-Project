@@ -29,7 +29,6 @@ const TutorRequest = () => {
                     })
                     .then((response) => {
                         setRequest(response.data.data);
-
                     });
 
             } catch (error) {
@@ -41,7 +40,7 @@ const TutorRequest = () => {
 
     return (
         <div className="col-12">
-            <table className="table table-bordered " >
+            <table className="table table-bordered" border="2">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -65,11 +64,11 @@ const TutorRequest = () => {
                                     </p>
                                     <a href="#" className="link">view all</a>
                                 </td>
-                                <td><GetAuthor id={item.studentId} /></td>
+                                <td><GetAuthor id={item.studentId}/></td>
                                 <td>{item.createAt}</td>
                                 <td>{item.createAt}</td>
                                 <td><Status status={item.status}/></td>
-                                <td><Action id={item.totorRequestId} status={item.status}/></td>
+                                <td><Action status={item.status}/></td>
                             </tr>
                         ]
                     })}
