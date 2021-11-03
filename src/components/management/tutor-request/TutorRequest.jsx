@@ -30,7 +30,6 @@ const TutorRequest = () => {
                     .then((response) => {
                         setRequest(response.data.data);
                     });
-
             } catch (error) {
                 console.log(error);
             }
@@ -68,7 +67,7 @@ const TutorRequest = () => {
                                 <td>{item.createAt}</td>
                                 <td>{item.createAt}</td>
                                 <td><Status status={item.status}/></td>
-                                <td><Action status={item.status}/></td>
+                                <td><Action requestUpdate={item}/></td>
                             </tr>
                         ]
                     })}

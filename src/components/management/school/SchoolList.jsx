@@ -45,8 +45,6 @@ const SchoolList = (id) => {
     }, [id])
 
 
-
-
     return (
         <div className="col-11" style={{ marginTop: 25}}>
             <table className="table table-bordered" >
@@ -66,7 +64,7 @@ const SchoolList = (id) => {
                             <td>{item.schoolName}</td>
                             <td>{item.address}</td>
                             <td>
-                                {item.schoolLevel == 12 ? "High school": "Secondary school"}
+                                {item.schoolLevel == 12 ? "Trung hoc Pho thong": "Trung hoc Co so"}
                             </td>
                             
                         </tr>
