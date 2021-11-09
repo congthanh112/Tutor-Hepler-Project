@@ -15,11 +15,6 @@ axios.interceptors.request.use(
 
 const Action = (requestUpdate) => {
 
-    const [status, setStatus] = useState();
-
-    useEffect(() => {
-
-    }, [status])
     const OnChangeStatus = (tutorRequest, newStatus) => {
         try {
             axios.put("https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests", {
@@ -31,9 +26,11 @@ const Action = (requestUpdate) => {
                 "subjectId": tutorRequest.subjectId,
                 "gradeId": tutorRequest.gradeId,
                 "createAt": tutorRequest.createAt,
-                "updateAt": null
+                "updateAt": new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
             })
-            .then(() => setStatus(newStatus))
+                .then(() => {
+                    window.location.reload();
+                })
         } catch (error) {
             console.log(error);
         }
@@ -73,7 +70,5 @@ const Action = (requestUpdate) => {
     }
 
 }
-
-
 
 export default Action

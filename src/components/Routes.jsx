@@ -8,6 +8,7 @@ import Student from './management/student/Student'
 import TutorRequest from './management/tutor-request/TutorRequest'
 import Feedback from './management/feedback/Feedback'
 import School from './management/school/School'
+import Subject from './management/subject/Subject'
 
 
 const Routes = () => {
@@ -19,6 +20,7 @@ const Routes = () => {
             <Route path='/tutor-request' component={TutorRequest}/> 
             <Route path='/feedback' component={Feedback}/>
             <Route path='/school' component={School}/>
+            <Route path='/subject' component={Subject}/>
             
         </Switch>
     )

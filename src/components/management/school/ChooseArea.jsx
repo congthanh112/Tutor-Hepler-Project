@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
 import "./school.scss"
+import axios from "axios";
 
-import { Box, InputLabel, MenuItem, FormControl, Select, Button, Typography, Modal, Paper, TextField } from '@mui/material'
+import { Box, InputLabel, MenuItem, FormControl, Select, Button, Modal, Typography, TextField } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 
@@ -20,8 +20,45 @@ const ChooseArea = (props) => {
     const { listArea, handleChangeIdSelected } = props;
 
     const [open, setOpen] = React.useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const [schoolName, setSchoolName] = useState('');
+    const [schoolType, setSchoolType] = useState('');
+    const [schoolAddress, setSchoolAddress] = useState('');
+    const [schoolArea, setSchoolArea] = useState('');
+
+    const handleAddSchool = () => {
+        try {
+            axios
+                .post("https://tutorhelper20210920193710.azurewebsites.net/api/v1/schools", {
+                    "schoolName": schoolName,
+                    "address": schoolAddress,
+                    "schoolLevel": parseInt(schoolType),
+                    "areaId": schoolArea
+                })
+                .then(() => {
+                    window.location.reload();
+                })
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleChangeSchoolName = (event) => {
+        setSchoolName(event.target.value);
+    }
+    const handleChangeSchoolType = (event) => {
+        setSchoolType(event.target.value);
+    }
+    const handleChangeSchoolAddress = (event) => {
+        setSchoolAddress(event.target.value);
+    }
+    const handleChangeSchoolArea = (event) => {
+        setSchoolArea(event.target.value);
+    }
+
 
     return (
         <div style={{ display: "inline-flex" }}>
@@ -31,7 +68,7 @@ const ChooseArea = (props) => {
                         <InputLabel>Select Area</InputLabel>
                         <Select onChange={handleChangeIdSelected}>
                             <MenuItem value="all">All</MenuItem>
-                            {listArea.map((item, id) => {
+                            {listArea.map((item) => {
                                 return [
                                     <MenuItem value={item.areaId}>{item.areaName}</MenuItem>
                                 ]
@@ -41,7 +78,7 @@ const ChooseArea = (props) => {
                 </Box>
             </div>
 
-            <Button variant="contained" startIcon={<AddCircleOutlineIcon />} style={{ marginLeft: 75, width: 125 }} onClick={handleOpen}>
+            <Button variant="contained" startIcon={<AddCircleOutlineIcon/>} style={{ marginLeft: 75, width: 125 }} onClick={handleOpen}>
                 Add new
             </Button>
             <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
@@ -49,16 +86,12 @@ const ChooseArea = (props) => {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Add new School
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2}}>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         <div style={{ display: 'inline-flex' }}>
-                            <TextField id="outlined-basic" label="School name:" size="small" variant="outlined" /><br />
+                            <TextField id="outlined-basic" label="School name:" size="small" variant="outlined" value={schoolName} onChange={handleChangeSchoolName} /><br />
                             <div style={{ minWidth: 128 }}>
-                                <TextField id="outlined-select-currency" select label="Select school type"
-                                // value={currency}
-                                // onChange={handleChange}
-                                sx={{width: 190, marginLeft: 3}}
-                                >
-                                    {schoolType.map((option) => (
+                                <TextField id="outlined-select-currency" select label="Select school type" sx={{ width: 190, marginLeft: 3 }}  onChange={handleChangeSchoolType}>
+                                    {listSchoolType.map((option) => (
                                         <MenuItem key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>
@@ -66,14 +99,14 @@ const ChooseArea = (props) => {
                                 </TextField>
                             </div>
                         </div>
-                        <TextField id="outlined-basic" label="Address:" size="small" variant="outlined" /><br />
+                        <TextField id="outlined-basic" label="Address:" size="small" variant="outlined" style={{ marginTop: '25' }} value={schoolAddress} onChange={handleChangeSchoolAddress} /><br />
 
                         <div style={{ width: 185 }}>
                             <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>
                                     <InputLabel>Select Area</InputLabel>
-                                    <Select onChange={handleChangeIdSelected}>
-                                        {listArea.map((item, id) => {
+                                    <Select onChange={handleChangeSchoolArea}>
+                                        {listArea.map((item) => {
                                             return [
                                                 <MenuItem value={item.areaId}>{item.areaName}</MenuItem>
                                             ]
@@ -82,17 +115,14 @@ const ChooseArea = (props) => {
                                 </FormControl>
                             </Box>
                         </div>
-                        <button style={{ marginLeft: 230, backgroundColor: "#04c23d" }} onClick={() => { addSchool() }}>Add</button>
+                        <button style={{ marginLeft: 230, backgroundColor: "#04c23d" }} onClick={() => handleAddSchool()}>Add</button>
                     </Typography>
                 </Box>
             </Modal>
         </div>
-    )
-}
+    );
+};
 
-const addSchool = () => {
-    console.log('AddSSchoahfaosdho')
-}
 
 const style = {
     position: 'absolute',
@@ -106,22 +136,20 @@ const style = {
     p: 4,
 };
 
-const schoolType = [
+const listSchoolType = [
     {
-        value: 'USD',
+        value: '5',
         label: 'Tieu hoc',
     },
     {
-        value: 'EUR',
+        value: '9',
         label: 'Trung hoc Co sơ',
     },
     {
-        value: 'BTC',
+        value: '12',
         label: 'Trung hoc Pho thong',
     },
-    {
-        value: 'JPY',
-        label: 'Dai Hoc',
-    },
 ];
+
+
 export default ChooseArea;

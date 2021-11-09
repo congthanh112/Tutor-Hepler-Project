@@ -20,22 +20,22 @@ const SchoolList = (id) => {
     useEffect(() => {
         const fetchRequest = async () => {
             try {
-                if(id.id == "all") {
+                if (id.id == "all") {
                     await axios
-                    .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/schools", {
-                        params: {
-                            PageSize: 100
-                        }
-                    })        
-                    .then((response) => {
-                        setResult(response.data.data)
-                    });
+                        .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/schools", {
+                            params: {
+                                PageSize: 100
+                            }
+                        })
+                        .then((response) => {
+                            setResult(response.data.data)
+                        });
                 } else {
                     await axios
-                    .get(`https://tutorhelper20210920193710.azurewebsites.net/api/v1/areas/${id.id}`)
-                    .then((response) => {
-                        setResult(response.data.schools)
-                    });
+                        .get(`https://tutorhelper20210920193710.azurewebsites.net/api/v1/areas/${id.id}`)
+                        .then((response) => {
+                            setResult(response.data.schools)
+                        });
                 }
             } catch (error) {
                 console.log(error);
@@ -46,7 +46,7 @@ const SchoolList = (id) => {
 
 
     return (
-        <div className="col-11" style={{ marginTop: 25}}>
+        <div className="col-11" style={{ marginTop: 25 }}>
             <table className="table table-bordered" >
                 <thead>
                     <tr>
@@ -57,20 +57,20 @@ const SchoolList = (id) => {
                     </tr>
                 </thead>
                 <tbody>
-                {result.map((item, id) => {
-                    return [
-                        <tr>
-                            <td>{id + 1}</td>
-                            <td>{item.schoolName}</td>
-                            <td>{item.address}</td>
-                            <td>
-                                {item.schoolLevel == 12 ? "Trung hoc Pho thong": "Trung hoc Co so"}
-                            </td>
-                            
-                        </tr>
-                    ]
-                })}
-            </tbody>
+                    {result.map((item, id) => {
+                        return [
+                            <tr>
+                                <td>{id + 1}</td>
+                                <td>{item.schoolName}</td>
+                                <td>{item.address}</td>
+                                <td>
+                                    {item.schoolLevel == 12 ? "Trung hoc Pho thong" : "Trung hoc Co so"}
+                                </td>
+
+                            </tr>
+                        ]
+                    })}
+                </tbody>
             </table>
         </div>
     )

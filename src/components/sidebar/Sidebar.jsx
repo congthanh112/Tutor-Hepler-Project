@@ -30,7 +30,7 @@ const Sidebar = (props) => {
     <div className="sidebar">
       <div className="sidebar__logo">      
         <img src={logo} alt="Logo" /><br/>
-        <h2>Tutor Helper</h2>
+        <h2 style={{marginLeft: 10}}>Tutor Helper</h2>
       </div>
       {sidebar_items.map((item, index) => (
         <Link to={item.route} key={index}>

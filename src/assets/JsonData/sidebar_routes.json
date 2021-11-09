@@ -25,6 +25,11 @@
         "icon": "bx bxs-school"
     },
     {
+        "display_name": "Subject",
+        "route": "/subject",
+        "icon": "bx bxs-spreadsheet"
+    },
+    {
         "display_name": "Feedback",
         "route": "/feedback",
         "icon": "bx bx-notification"

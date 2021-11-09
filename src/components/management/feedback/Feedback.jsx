@@ -30,9 +30,6 @@ const Card = () => {
         }
     }, []);
 
-
-
-
     return (
         <div className="col-10">
             <table className="table table-bordered">
@@ -61,13 +58,11 @@ const Card = () => {
                                 <td>{item.ratingScorce}</td>
                                 <td>{item.createAt}</td>
                             </tr>
-
                         ]
                     })}
                 </tbody>
             </table>
         </div>
-
     );
 };
 

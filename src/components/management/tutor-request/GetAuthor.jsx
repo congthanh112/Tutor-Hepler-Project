@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./tutor-request.scss";
 import axios from "axios";
 
@@ -15,7 +15,6 @@ axios.interceptors.request.use(
 const GetAuthor = ({ id }) => {
     const [author, setAuthor] = useState([]);
 
-    // useEffect(() => {
     try {
         axios
             .get(`https://tutorhelper20210920193710.azurewebsites.net/api/v1/students/${id}`)
@@ -25,7 +24,6 @@ const GetAuthor = ({ id }) => {
     } catch (error) {
         console.log(error);
     }
-    // }, [id]);
 
     return (
         <div>{author}</div>

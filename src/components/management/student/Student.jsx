@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./student.scss";
 import axios from "axios";
-import Card from "./Card";
 import Pagination from "../../pagination/Pagination";
+import GetGrade from "./GetGrade";
+import GetSchool from "./GetSchool";
 
 axios.interceptors.request.use(
     (config) => {
@@ -16,24 +17,24 @@ axios.interceptors.request.use(
 
 const Student = () => {
     const [student, setStudent] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [resultPerPage, setResultPerPage] = useState(6);
+    //const [loading, setLoading] = useState(false);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [resultPerPage, setResultPerPage] = useState(6);
 
     useEffect(() => {
         const fetchRequest = async () => {
-            setLoading(true);
+            //setLoading(true);
             try {
                 await axios
                     .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/students", {
                         params: {
-                            PageNume: currentPage,
+                            //PageNume: currentPage,
                             PageSize: 100
                         }
                     })
                     .then((response) => {
                         setStudent(response.data.data);
-                        setLoading(false);
+                       // setLoading(false);
                     });
             } catch (error) {
                 console.log(error);
@@ -42,20 +43,58 @@ const Student = () => {
         fetchRequest();
     }, []);
 
-    //Get current result
-    const indexOfLastResult = currentPage * resultPerPage;
-    const indexOfFirstResult = indexOfLastResult - resultPerPage;
-    const currentResult = student.slice(indexOfFirstResult, indexOfLastResult);
+    // //Get current result
+    // const indexOfLastResult = currentPage * resultPerPage;
+    // const indexOfFirstResult = indexOfLastResult - resultPerPage;
+    // const currentResult = student.slice(indexOfFirstResult, indexOfLastResult);
 
-    //Change page 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    // //Change page 
+    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // return (
+    //     <div className="container mt-5">
+    //         <Card result={currentResult} loading={loading} />
+    //         <Pagination resultPerPage={resultPerPage} totalResult={student.length} paginate={paginate} />
+    //     </div>
+    // )
+
 
     return (
-        <div className="container mt-5">
-            <Card result={currentResult} loading={loading} />
-            <Pagination resultPerPage={resultPerPage} totalResult={student.length} paginate={paginate} />
+        <div className="col-12">
+            <table className="table table-bordered" border="2">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Information</th>
+                        <th>Grade</th>
+                        <th>School</th>
+                        <th>Create Date</th>                  
+                    </tr>
+                </thead>
+                <tbody>
+                    {student.map((item, id) => {
+                        return [
+                            <tr>
+                                <td>{id + 1}</td>
+                                <td>
+                                    <img src={item.imagePath} width="60" height="60" style={{marginBottom: '45px'}}/>
+                                    <p style={{display: 'inline-block', marginLeft: '5px'}}>
+                                        <h6>{item.fullName}</h6>
+                                        {item.email}<br/>
+                                        {item.phoneNumber}
+                                    </p>                                   
+                                </td>
+                                <td>{<GetGrade id={item.gradeId}/>}</td>
+                                <td>{<GetSchool id={item.schoolId}/>}</td>                               
+                                <td>{item.createAt}</td>
+                                                    
+                            </tr>
+                        ]
+                    })}
+                </tbody>
+            </table>
         </div>
-    )
+    );
 };
 
 export default Student;

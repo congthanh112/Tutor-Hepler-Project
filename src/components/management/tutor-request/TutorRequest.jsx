@@ -21,7 +21,7 @@ const TutorRequest = () => {
     useEffect(() => {
         const fetchRequest = async () => {
             try {
-                axios
+                await axios
                     .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/tutor-requests", {
                         params: {
                             PageSize: 100,
@@ -29,6 +29,7 @@ const TutorRequest = () => {
                     })
                     .then((response) => {
                         setRequest(response.data.data);
+                        console.log("RRRRRRRRRRRRRRRRRRRRRRRRRR",response.data.data)
                     });
             } catch (error) {
                 console.log(error);
@@ -46,7 +47,7 @@ const TutorRequest = () => {
                         <th>Content</th>
                         <th>Author</th>
                         <th>Create Date</th>
-                        <th>Update Date</th>
+                        <th>Processed Date</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>

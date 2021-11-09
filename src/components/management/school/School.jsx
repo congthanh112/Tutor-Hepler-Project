@@ -43,6 +43,7 @@ const School = () => {
     const handleChangeIdSelected = (event, value) => {
         setIdSelected(value.props.value)
     };
+    
     return (
         <div>
             <ChooseArea listArea={listArea} handleChangeIdSelected={handleChangeIdSelected}  />  
