@@ -12,7 +12,6 @@ axios.interceptors.request.use(
     }
 );
 
-
 const SchoolList = (id) => {
 
     const [result, setResult] = useState([]);

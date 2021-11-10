@@ -66,7 +66,6 @@ const Tutor = () => {
                         <th>No.</th>
                         <th>Information</th>
                         <th>Grade</th>
-                        <th>School</th>
                         <th>Create Date</th>                  
                     </tr>
                 </thead>
@@ -76,7 +75,7 @@ const Tutor = () => {
                             <tr>
                                 <td>{id + 1}</td>
                                 <td>
-                                    <img src={item.imagePath} width="60" height="60" style={{marginBottom: '45px'}}/>
+                                    <img src={item.imagePath} width="60" height="60" style={{marginBottom: '45px', borderRadius: 20}}/>
                                     <p style={{display: 'inline-block', marginLeft: '5px'}}>
                                         <h6>{item.fullName}</h6>
                                         {item.email}<br/>
@@ -85,6 +84,7 @@ const Tutor = () => {
                                 </td>
                                 {/* <td>{<GetGrade id={item.gradeId}/>}</td>
                                 <td>{<GetSchool id={item.schoolId}/>}</td>                                */}
+                                <td>{item.courses.title}</td>
                                 <td>{item.createAt}</td>
                                                     
                             </tr>
