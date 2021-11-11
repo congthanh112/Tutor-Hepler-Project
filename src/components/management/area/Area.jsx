@@ -52,6 +52,7 @@ const Area = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [idEdit, setIdEdit] = useState();
     const [newAreaName, setNewAreaName] = useState();
 
     useEffect(() => {
@@ -74,18 +75,19 @@ const Area = () => {
         fetchRequest();
     }, [])
 
-    const handleEditClick = (id) => {
+    const handleEditClick = () => {
+        console.log("AAAAAAAAAAAAA")
         try {
              axios
                 .put("https://tutorhelper20210920193710.azurewebsites.net/api/v1/areas", {
-                    "areaId": id,
+                    "areaId": idEdit,
                     "areaName": newAreaName,
                     params: {
-                        id: id,                      
+                        id: idEdit,                      
                     }                                                           
                 })
                 .then((response) => {
-                    setListArea(response.data)
+                    window.location.reload();
                 });
 
         } catch (error) {
@@ -128,7 +130,10 @@ const Area = () => {
                             <TableCell align="right">{id + 1}</TableCell>
                             <TableCell align="right">{item.areaName}</TableCell>
                             <TableCell align="right">
-                                <GridActionsCellItem icon={<EditIcon />} onClick={handleOpen} />
+                                <GridActionsCellItem icon={<EditIcon />} 
+                                //onClick={handleOpen} 
+                                onClick={() => setIdEdit(item.areaId), handleOpen}
+                                />
                                 <GridActionsCellItem icon={<DeleteIcon />} onClick={() => handleDeleteClick(item.areaId)} />
                             </TableCell>
                         </TableRow>
@@ -146,7 +151,7 @@ const Area = () => {
                         </div>
                         <button
                             style={{ marginLeft: 20, backgroundColor: "#04c23d" }}
-                            // onClick={() => handleEditClick(item.areaId)}
+                             onClick={() => handleEditClick()}
                         >
                             Edit
                         </button>
