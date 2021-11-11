@@ -19,14 +19,13 @@ const ChooseGrade = (props) => {
     const { listGrade, handleChangeIdSelected } = props;
 
     const [open, setOpen] = React.useState(false);
-
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const [subjectName, setSubjectName] = useState('');
     const [subjectGrade, setSubjectGrade] = useState('');
 
-     const handleAddSubject = () => {
+     const handleAddSubject = () => {        
         try {
             axios
                 .post("https://tutorhelper20210920193710.azurewebsites.net/api/v1/subjects", {

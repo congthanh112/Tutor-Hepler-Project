@@ -1,0 +1,42 @@
+.main {
+    display: inline-flex;
+    margin-left: 15px;
+    width: 100%;
+    span {
+        color: #fff;
+        font-size: 25px;
+        text-align: center;
+        
+        h3 {
+            margin-top: 25px;
+        }
+    }
+    
+    .totalRequest {
+        width: 45%;
+        height: 150px;
+        margin-left: 15px;
+        background-color: #a06dde;
+    }
+
+    .totalTutor {
+        width: 45%;
+        height: 150px;
+        margin-left: 15px;
+        background-color: #6ddfe3;
+    }
+
+    .totalStudent {
+        width: 45%;
+        height: 150px;
+        margin-left: 15px;
+        background-color: #6de389;
+    }
+
+    .totalPending {
+        width: 45%;
+        height: 150px;
+        margin-left: 15px;
+        background-color: #f06770;
+    }
+}

@@ -20,6 +20,7 @@ const SubjectList = (id) => {
         const fetchRequest = async () => {
             try {
                 if (id.id == "all") {
+                    console.log("id", id.id)
                     await axios
                         .get("https://tutorhelper20210920193710.azurewebsites.net/api/v1/subjects", {
                             params: {
@@ -29,11 +30,12 @@ const SubjectList = (id) => {
                         .then((response) => {
                             setResult(response.data.data)
                         });
-                } else {
+                } else {                  
                     await axios
                         .get(`https://tutorhelper20210920193710.azurewebsites.net/api/v1/grades/${id.id}`)
                         .then((response) => {
-                            setResult(response.data.subjects)
+                            //setResult(response.data)
+                            console.log("RRRRRR",response.data);
                         });
                 }
             } catch (error) {

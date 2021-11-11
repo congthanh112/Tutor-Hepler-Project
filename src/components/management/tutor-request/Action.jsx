@@ -56,7 +56,13 @@ const Action = (requestUpdate) => {
             </div>
         )
     } else if (requestUpdate.requestUpdate.status == "Rejected") {
-        return <div></div>
+        return (
+            <div className="action">
+                <button type="button" className="delete" onClick={() => OnChangeStatus(requestUpdate.requestUpdate, "Deleted")}>
+                    <b>Delete</b>
+                </button>
+            </div>
+        )
     } else if (requestUpdate.requestUpdate.status == "Accepted") {
         return (
             <div className="action">

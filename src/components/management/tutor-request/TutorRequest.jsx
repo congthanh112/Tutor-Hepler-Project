@@ -29,7 +29,6 @@ const TutorRequest = () => {
                     })
                     .then((response) => {
                         setRequest(response.data.data);
-                        console.log("RRRRRRRRRRRRRRRRRRRRRRRRRR",response.data.data)
                     });
             } catch (error) {
                 console.log(error);
@@ -46,7 +45,7 @@ const TutorRequest = () => {
                         <th>No.</th>
                         <th>Content</th>
                         <th>Author</th>
-                        <th>Create Date</th>
+                        <th >Create Date</th>
                         <th>Processed Date</th>
                         <th>Status</th>
                         <th>Action</th>

@@ -34,6 +34,7 @@ const SchoolList = (id) => {
                         .get(`https://tutorhelper20210920193710.azurewebsites.net/api/v1/areas/${id.id}`)
                         .then((response) => {
                             setResult(response.data.schools)
+                            console.log(response.data)
                         });
                 }
             } catch (error) {
@@ -52,7 +53,6 @@ const SchoolList = (id) => {
                         <th>No.</th>
                         <th>School</th>
                         <th>Address</th>
-                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,12 +60,8 @@ const SchoolList = (id) => {
                         return [
                             <tr>
                                 <td>{id + 1}</td>
-                                <td>{item.schoolName}</td>
-                                <td>{item.address}</td>
-                                <td>
-                                    {item.schoolLevel == 12 ? "Trung hoc Pho thong" : "Trung hoc Co so"}
-                                </td>
-
+                                <td> {item.schoolLevel == 12 ? "Trung hoc Pho thong" : "Trung hoc Co so"} {item.schoolName}</td>
+                                <td>{item.address}</td>                              
                             </tr>
                         ]
                     })}

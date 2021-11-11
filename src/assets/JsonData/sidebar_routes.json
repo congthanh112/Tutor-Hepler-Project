@@ -20,6 +20,11 @@
         "icon": "bx bx-user-pin"
     },   
     {
+        "display_name": "Area",
+        "route": "/area",
+        "icon": "bx bx-area"
+    },   
+    {
         "display_name": "School",
         "route": "/school",
         "icon": "bx bxs-school"

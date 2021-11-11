@@ -1,10 +1,11 @@
 .site-footer
 {
-  background-color:#26272b;
+  background-color:#ffe4d4;
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
-  color:#737373;
+  color:#040505;
+  margin-left: 300px;
 }
 .site-footer hr
 {
@@ -17,7 +18,7 @@
 }
 .site-footer h6
 {
-  color:#fff;
+  color:rgb(0, 0, 0);
   font-size:16px;
   text-transform:uppercase;
   margin-top:5px;
@@ -25,7 +26,7 @@
 }
 .site-footer a
 {
-  color:#737373;
+  color:#ffffff;
 }
 .site-footer a:hover
 {
@@ -66,7 +67,7 @@
   margin-left:6px;
   margin-right:0;
   border-radius:100%;
-  background-color:#33353d
+  background-color:#ffffff
 }
 .copyright-text
 {
@@ -148,9 +149,13 @@
 {
   background-color:#007bb6
 }
-.social-icons a.dribbble:hover
+.social-icons a.instagram:hover
 {
   background-color:#ea4c89
+}
+.social-icons a.github:hover
+{
+  background-color:#1f1c1d
 }
 @media (max-width:767px)
 {
@@ -160,4 +165,8 @@
     margin-right:0;
     font-weight:600
   }
+}
+
+.text-justify {
+  font-size: 19px
 }
