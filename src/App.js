@@ -80,8 +80,8 @@ function App() {
   if (!isSignedIn) {
     return (
       <div>
-        <h1>My App</h1>
-        <p>Please sign-in:</p>
+        <h1 style={{marginLeft: 655}}>Tutor Helper</h1>
+        <h5 style={{marginLeft: 700}}>Please sign-in:</h5>
         <StyledFirebaseAuth
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
